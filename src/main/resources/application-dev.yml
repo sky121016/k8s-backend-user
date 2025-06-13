@@ -19,4 +19,6 @@ spring:
   kafka:
     bootstrap-servers: k8s-external-kafka-service:9092
   config:
-    import: file:/etc/config/application-dev.yml
+    import:
+      - file:/etc/config/application-dev.yml
+      - file:/etc/secret/application-secret.yml
