@@ -19,7 +19,6 @@ spec:
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: dev
-
           ports:
             - containerPort: 8080
           livenessProbe:
@@ -40,6 +39,7 @@ spec:
             periodSeconds: 5          # 5초마다 체크
             failureThreshold: 3       # 3회 연속 실패 시 서비스 트래픽 중지
             timeoutSeconds: 3         # 3초 내 응답 필요
+
           volumeMounts:
             - name: backend-user-config-volume
               mountPath: /etc/config
