@@ -16,14 +16,17 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/api/user/v1", produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
-public class UserController {
-    private final RemoteAlimService remoteAlimService;
+public class UserAuthController {
     private final SiteUserService siteUserService;
 
-    @GetMapping(value = "/test")
-    public String test() {
-        String remoteMessage = remoteAlimService.hello().getData();
-        return remoteMessage;
+    @PostMapping(value = "/register")
+    public ApiResponseDto<String> register(@RequestBody @Valid SiteUserRegisterDto registerDto){
+        siteUserService.registerUser(registerDto);
+        return ApiResponseDto.defaultOk();
     }
 
+    @PostMapping(value = "/login")
+    public ApiResponseDto<TokenDto.AccessRefreshToken> login(@RequestBody @Valid SiteUserLoginDto loginDto) {TokenDto.AccessRefreshToken token = siteUserService.login(loginDto);
+        return ApiResponseDto.createOk(token);
+    }
 }
