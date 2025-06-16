@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: k8s-backend-user-deployment
 spec:
-  replicas: 3  # 원하는 파드 복제본 수 (기본값: 1)
+  replicas: 1  # 원하는 파드 복제본 수 (기본값: 1)
   selector:
     matchLabels:
       app: k8s-backend-user  # 템플릿의 labels와 일치해야 함
@@ -23,7 +23,7 @@ spec:
             - containerPort: 8080
           livenessProbe:
             httpGet:
-              path: /backend/post/v1/k8s/liveness  # 스프링 부트 생존 상태 엔드포인트
+              path: /backend/user/v1/k8s/liveness  # 스프링 부트 생존 상태 엔드포인트
               port: 8080
             initialDelaySeconds: 30   # 컨테이너 시작 후 첫 검사까지 대기
             periodSeconds: 5          # 5초마다 체크
@@ -33,7 +33,7 @@ spec:
           # Readiness Probe 추가 (트래픽 유입 제어용)
           readinessProbe:
             httpGet:
-              path: /backend/post/v1/k8s/readiness  # 스프링 부트 준비 상태 엔드포인트
+              path: /backend/user/v1/k8s/readiness  # 스프링 부트 준비 상태 엔드포인트
               port: 8080
             initialDelaySeconds: 30   # 컨테이너 시작 후 첫 검사까지 대기
             periodSeconds: 5          # 5초마다 체크
