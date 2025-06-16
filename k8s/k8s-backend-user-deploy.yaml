@@ -19,11 +19,7 @@ spec:
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: dev
-            - name: server.port
-              valueFrom:
-                configMapKeyRef:
-                  name: backend-user-config
-                  key: server.port
+
           ports:
             - containerPort: 8080
           livenessProbe:
