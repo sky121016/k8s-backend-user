@@ -29,4 +29,9 @@ public class UserAuthController {
     public ApiResponseDto<TokenDto.AccessRefreshToken> login(@RequestBody @Valid SiteUserLoginDto loginDto) {TokenDto.AccessRefreshToken token = siteUserService.login(loginDto);
         return ApiResponseDto.createOk(token);
     }
+
+    @GetMapping(value = "/test")
+    public ApiResponseDto<String> test(){
+        return ApiResponseDto.createOk("버전1");
+    }
 }
